@@ -1,59 +1,83 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>Login-CI Login Registration</title>
-    <link rel="stylesheet" href="<?php echo base_url('/assets/css/bootstrap.min.css')?>" />
+    <meta charset="UTF-8">
+    <title>CodeInsect | Admin System Log in</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
-  <body>
- 
-    <div class="container">
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="login-panel panel panel-success">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Login</h3>
-                </div>
-                <?php
-              $success_msg= $this->session->flashdata('success_msg');
-              $error_msg= $this->session->flashdata('error_msg');
- 
-                  if($success_msg){
-                    ?>
-                    <div class="alert alert-success">
-                      <?php echo $success_msg; ?>
-                    </div>
-                  <?php
-                  }
-                  if($error_msg){
-                    ?>
-                    <div class="alert alert-danger">
-                      <?php echo $error_msg; ?>
-                    </div>
-                    <?php
-                  }
-                  ?>
- 
-                <div class="panel-body">
-                    <form role="form" method="post" action="<?php echo base_url('index.php/user/login_user'); ?>">
-                        <fieldset>
-                            <div class="form-group"  >
-                                <input class="form-control" placeholder="E-mail" name="user_email" type="email" autofocus>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="user_password" type="password" value="">
-                            </div>
-                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Login" name="login_user" >
-                        </fieldset>
-                    </form>
-                <center><b>Not registered ?</b> <br></b><a href="<?php echo base_url('index.php/user'); ?>">Register here</a></center><!--for centered text-->
- 
-                </div>
+  <body class="login-page">
+    <div class="login-box">
+      <div class="login-logo">
+        <a href="#"><b>CodeInsect</b><br>Admin System</a>
+      </div><!-- /.login-logo -->
+      <div class="login-box-body">
+        <p class="login-box-msg">Sign In</p>
+        <?php $this->load->helper('form'); ?>
+        <div class="row">
+            <div class="col-md-12">
+                <?php echo validation_errors('<div class="alert alert-danger alert-dismissable">', ' <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button></div>'); ?>
             </div>
         </div>
-    </div>
-</div>
- 
- 
+        <?php
+        $this->load->helper('form');
+        $error = $this->session->flashdata('error');
+        if($error)
+        {
+            ?>
+            <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <?php echo $error; ?>                    
+            </div>
+        <?php }
+        $success = $this->session->flashdata('success');
+        if($success)
+        {
+            ?>
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <?php echo $success; ?>                    
+            </div>
+        <?php } ?>
+        
+        <form action="<?php echo base_url(); ?>loginMe" method="post">
+          <div class="form-group has-feedback">
+            <input type="email" class="form-control" placeholder="Email" name="email" required />
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="password" class="form-control" placeholder="Password" name="password" required />
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          </div>
+          <div class="row">
+            <div class="col-xs-8">    
+              <!-- <div class="checkbox icheck">
+                <label>
+                  <input type="checkbox"> Remember Me
+                </label>
+              </div>  -->                       
+            </div><!-- /.col -->
+            <div class="col-xs-4">
+              <input type="submit" class="btn btn-primary btn-block btn-flat" value="Sign In" />
+            </div><!-- /.col -->
+          </div>
+        </form>
+
+        <a href="<?php echo base_url() ?>forgotPassword">Forgot Password</a><br>
+        
+      </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
+
+    <script src="<?php echo base_url(); ?>assets/js/jQuery-2.1.4.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
   </body>
 </html>

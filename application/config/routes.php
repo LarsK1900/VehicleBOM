@@ -49,13 +49,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'user';
 
-$route['user']['get'] = 'user/index';
-$route['user/register']['post'] = 'user/register_user';
-$route['user/login']['get'] = 'user/login_view';
-$route['user/login']['post'] = 'user/login_user';
-$route['user/profile']['get'] = 'user/user_profile';
-$route['user/logout']['get'] = 'user/user_logout';
+$route['default_controller'] = "login";
+$route['404_override'] = 'error';
 
-$route['(:any)'] = 'pages/view/$1';
+
+/*********** USER DEFINED ROUTES *******************/
+
+$route['loginMe'] = 'login/loginMe';
+$route['dashboard'] = 'user';
+$route['logout'] = 'user/logout';
+$route['userListing'] = 'user/userListing';
+$route['userListing/(:num)'] = "user/userListing/$1";
+$route['addNew'] = "user/addNew";
+
+$route['addNewUser'] = "user/addNewUser";
+$route['editOld'] = "user/editOld";
+$route['editOld/(:num)'] = "user/editOld/$1";
+$route['editUser'] = "user/editUser";
+$route['deleteUser'] = "user/deleteUser";
+$route['loadChangePass'] = "user/loadChangePass";
+$route['changePassword'] = "user/changePassword";
+$route['pageNotFound'] = "user/pageNotFound";
+$route['checkEmailExists'] = "user/checkEmailExists";
+$route['login-history'] = "user/loginHistoy";
+$route['login-history/(:num)'] = "user/loginHistoy/$1";
+$route['login-history/(:num)/(:num)'] = "user/loginHistoy/$1/$2";
+
+$route['forgotPassword'] = "login/forgotPassword";
+$route['resetPasswordUser'] = "login/resetPasswordUser";
+$route['resetPasswordConfirmUser'] = "login/resetPasswordConfirmUser";
+$route['resetPasswordConfirmUser/(:any)'] = "login/resetPasswordConfirmUser/$1";
+$route['resetPasswordConfirmUser/(:any)/(:any)'] = "login/resetPasswordConfirmUser/$1/$2";
+$route['createPasswordUser'] = "login/createPasswordUser";
+
+/* End of file routes.php */
+/* Location: ./application/config/routes.php */
